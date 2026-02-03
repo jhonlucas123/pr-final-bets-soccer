@@ -4,9 +4,9 @@ require('dotenv').config();
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false },
-    max: 10,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000
+    max: 3, // En serverless, menos es más para no agotar el límite de Neon
+    idleTimeoutMillis: 1000, // Liberar la conexión casi inmediatamente (1s)
+    connectionTimeoutMillis: 10000
 });
 
 module.exports = {
