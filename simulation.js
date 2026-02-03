@@ -99,13 +99,10 @@ class SimulationEngine {
             this.allMatches = this.db.allMatches || [];
             this.teams = this.db.teams;
         } catch (error) {
-            console.error("Error cargando datos de Postgres:", error);
-            // Fallback to empty if DB fails
-            this.db = { users: [], bets: [], messages: [], matches: [], allMatches: [], notifications: [], simulationState: null };
-            this.state = { currentJornada: 1, leagueStarted: false, lastJornadaStart: null, jornadas: [] };
-            this.allMatches = [];
-            this.teams = [];
-            this.db.players = [];
+            console.error("Error crítico cargando datos de Postgres:", error);
+            // Ya no hacemos fallback a arrays vacíos si es un error real
+            // para evitar estados inconsistentes (404s falsos)
+            throw error;
         }
     }
 
