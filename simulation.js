@@ -18,7 +18,7 @@ class SimulationEngine {
         this.matches = [];
         this.db = { users: [], bets: [], messages: [], matches: [], allMatches: [], players: [], notifications: [] };
 
-        this.initialized = this.init();
+        //this.initialized = this.init();
     }
 
     async init() {
